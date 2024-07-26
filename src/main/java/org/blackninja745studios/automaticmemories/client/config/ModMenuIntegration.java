@@ -36,10 +36,9 @@ public class ModMenuIntegration implements ModMenuApi {
                     })
                     .setTooltipSupplier(() -> Optional.of(new Text[] {
                         Text.translatable("automaticmemories.config.interval_ms.tooltip.main"),
-                        Text.translatable("automaticmemories.config.interval_ms.tooltip.minimum"),
-                        // TODO: make this Text.translatable
-                        Text.literal("Time until next screenshot: " +
-                                PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS - PeriodicTimerSingleton.timeSinceLastScreenshot())
+                        Text.translatable("automaticmemories.config.interval_ms.tooltip.current", PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS)),
+                        Text.translatable("automaticmemories.config.interval_ms.tooltip.remaining",
+                            PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS - PeriodicTimerSingleton.timeSinceLastScreenshot())
                         )
                     }))
                     .build()
