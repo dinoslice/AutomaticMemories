@@ -5,8 +5,8 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import org.apache.logging.log4j.LogManager;
 import org.blackninja745studios.automaticmemories.AutomaticMemories;
 import org.blackninja745studios.automaticmemories.client.PeriodicTimerSingleton;
@@ -34,13 +34,21 @@ public class ModMenuIntegration implements ModMenuApi {
                         LogManager.getLogger(AutomaticMemories.class).warn("set new delay");
                         PeriodicTimerSingleton.restartOrStartTimer(0, l);
                     })
-                    .setTooltipSupplier(() -> Optional.of(new Text[] {
-                        Text.translatable("automaticmemories.config.interval_ms.tooltip.main"),
-                        Text.translatable("automaticmemories.config.interval_ms.tooltip.current", PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS)),
-                        Text.translatable("automaticmemories.config.interval_ms.tooltip.remaining",
-                            PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS - PeriodicTimerSingleton.timeSinceLastScreenshot())
-                        )
-                    }))
+                    .setTooltipSupplier(l -> {
+                        Text main = Text.translatable("automaticmemories.config.interval_ms.tooltip.main");
+
+                        Text current = Text.translatable("automaticmemories.config.interval_ms.tooltip.editing", PeriodicTimerSingleton.formatTime(l))
+                                .formatted(Formatting.GOLD);
+
+                        Text remaining = Text.translatable("automaticmemories.config.interval_ms.tooltip.remaining",
+                                PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS - PeriodicTimerSingleton.timeSinceLastScreenshot()),
+                                PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS)
+                        ).formatted(Formatting.GRAY);
+
+                        return l == Configuration.INTERVAL_MS ?
+                                Optional.of(new Text[] { main, remaining }) :
+                                Optional.of(new Text[] { main, current, remaining });
+                    })
                     .build()
             );
 
