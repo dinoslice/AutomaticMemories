@@ -9,7 +9,6 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.Text;
 import org.apache.logging.log4j.LogManager;
 import org.blackninja745studios.automaticmemories.AutomaticMemories;
-import org.blackninja745studios.automaticmemories.client.AutomaticMemoriesClient;
 import org.blackninja745studios.automaticmemories.client.PeriodicTimerSingleton;
 
 import java.util.Optional;
@@ -35,9 +34,13 @@ public class ModMenuIntegration implements ModMenuApi {
                         LogManager.getLogger(AutomaticMemories.class).warn("set new delay");
                         PeriodicTimerSingleton.restartOrStartTimer(0, l);
                     })
-                    .setTooltip(Optional.of(new Text[] {
+                    .setTooltipSupplier(() -> Optional.of(new Text[] {
                         Text.translatable("automaticmemories.config.interval_ms.tooltip.main"),
                         Text.translatable("automaticmemories.config.interval_ms.tooltip.minimum"),
+                        // TODO: make this Text.translatable
+                        Text.literal("Time until next screenshot: " +
+                                PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS - PeriodicTimerSingleton.timeSinceLastScreenshot())
+                        )
                     }))
                     .build()
             );

@@ -19,8 +19,9 @@ public class PeriodicTimerSingleton {
         LogManager.getLogger(AutomaticMemories.class).warn("starting new timer");
 
         cancelTimer();
-
         periodicTimer = new Timer();
+        lastScreenshotTime = Instant.now();
+
         periodicTimer.schedule(new TimerTask() {
             private final MinecraftClient client = MinecraftClient.getInstance();
 
@@ -33,8 +34,6 @@ public class PeriodicTimerSingleton {
                 lastScreenshotTime = Instant.now();
             }
         }, delayBeforeFirst, intervalMs);
-
-        lastScreenshotTime = Instant.now();
     }
 
     public static void cancelTimer() {
@@ -42,7 +41,7 @@ public class PeriodicTimerSingleton {
             periodicTimer.cancel();
     }
 
-    public static long remainingMsBeforeScreenshot() {
+    public static long timeSinceLastScreenshot() {
         return Duration.between(lastScreenshotTime, Instant.now()).toMillis();
     }
 
@@ -54,5 +53,31 @@ public class PeriodicTimerSingleton {
                         () -> client.inGameHud.getChatHud().addMessage(message)
                 )
         );
+    }
+
+    public static String formatTime(long millis) {
+        final long MILLIS_PER_SECOND = 1000;
+        final long MILLIS_PER_MINUTE = MILLIS_PER_SECOND * 60;
+        final long MILLIS_PER_HOUR = MILLIS_PER_MINUTE * 60;
+        final long MILLIS_PER_DAY = MILLIS_PER_HOUR * 24;
+
+        long day = millis / MILLIS_PER_DAY;
+        long hour = millis / MILLIS_PER_HOUR % 24;
+        long min = millis / MILLIS_PER_MINUTE % 60;
+        long sec = millis / MILLIS_PER_SECOND % 60;
+
+        StringBuilder s = new StringBuilder();
+
+        if (day != 0) {
+            s.append(day);
+            s.append('d');
+        }
+        if (hour != 0) {
+            s.append(hour);
+            s.append('h');
+        }
+        s.append(String.format("%02dm%02ds", min, sec));
+
+        return s.toString();
     }
 }
