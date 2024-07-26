@@ -15,6 +15,7 @@ import java.util.Properties;
 
 public class Configuration {
     public static long INTERVAL_MS = 3600 * 1000;
+    public static long LEFTOVER_INTERVAL_MS = 0;
 
     public static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("automaticmemories.properties");
 
@@ -23,16 +24,19 @@ public class Configuration {
             Properties properties = new Properties(1);
             properties.load(reader);
 
-            Configuration.INTERVAL_MS = Long.parseLong(properties.getProperty("interval_ms", String.valueOf(INTERVAL_MS)));
-        } catch (Exception ignored) {}
+            Configuration.INTERVAL_MS = Math.max(0, Long.parseLong(properties.getProperty("interval_ms", String.valueOf(INTERVAL_MS))));
 
-        saveToFile(path);
+            long leftoverIntervalMs = Long.parseLong(properties.getProperty("leftover_interval_ms", String.valueOf(LEFTOVER_INTERVAL_MS)));
+            Configuration.LEFTOVER_INTERVAL_MS = Math.min(Math.max(0, leftoverIntervalMs), Configuration.INTERVAL_MS);
+
+        } catch (Exception ignored) {}
     }
 
     public static void saveToFile(Path path) {
         Properties properties = new Properties(1);
 
         properties.put("interval_ms", String.valueOf(INTERVAL_MS));
+        properties.put("leftover_interval_ms", String.valueOf(LEFTOVER_INTERVAL_MS));
 
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             properties.store(writer, "AutomaticMemories config");

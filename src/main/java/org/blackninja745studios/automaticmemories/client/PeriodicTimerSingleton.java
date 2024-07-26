@@ -4,6 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.ScreenshotRecorder;
 import org.apache.logging.log4j.LogManager;
 import org.blackninja745studios.automaticmemories.AutomaticMemories;
+import org.blackninja745studios.automaticmemories.client.config.Configuration;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -13,6 +14,8 @@ import java.util.TimerTask;
 // TODO: is this the best way to do this?
 public class PeriodicTimerSingleton {
     private static Timer periodicTimer;
+
+    // TODO: eventually change this to the next scheduled time?
     private static Instant lastScreenshotTime = Instant.now();
 
     public static void restartOrStartTimer(long delayBeforeFirst, long intervalMs) {
@@ -20,7 +23,7 @@ public class PeriodicTimerSingleton {
 
         cancelTimer();
         periodicTimer = new Timer();
-        lastScreenshotTime = Instant.now();
+        lastScreenshotTime = Instant.now().minusMillis(Configuration.INTERVAL_MS - delayBeforeFirst);
 
         periodicTimer.schedule(new TimerTask() {
             private final MinecraftClient client = MinecraftClient.getInstance();
