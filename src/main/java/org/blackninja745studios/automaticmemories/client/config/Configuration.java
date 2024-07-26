@@ -35,7 +35,7 @@ public class Configuration {
     public static void saveToFile(Path path) {
         Properties properties = new Properties(1);
 
-        properties.put("period_ms", String.valueOf(INTERVAL_MS));
+        properties.put("interval_ms", String.valueOf(INTERVAL_MS));
 
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             properties.store(writer, "AutomaticMemories config");
