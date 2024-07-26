@@ -45,6 +45,16 @@ public class ModMenuIntegration implements ModMenuApi {
                     .build()
             );
 
+            category.addEntry(
+                entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.restart_timer_each_session"), Configuration.RESTART_TIMER_EACH_SESSION)
+                    .setDefaultValue(false)
+                    .setSaveConsumer(b -> Configuration.RESTART_TIMER_EACH_SESSION = b)
+                    .setTooltip(Optional.of(new Text[] {
+                        Text.translatable("automaticmemories.config.restart_timer_each_session.tooltip")
+                    }))
+                    .build()
+            );
+
             return builder.build();
         };
     }

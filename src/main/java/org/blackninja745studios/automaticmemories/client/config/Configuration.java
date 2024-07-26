@@ -16,6 +16,7 @@ import java.util.Properties;
 public class Configuration {
     public static long INTERVAL_MS = 3600 * 1000;
     public static long LEFTOVER_INTERVAL_MS = 0;
+    public static boolean RESTART_TIMER_EACH_SESSION = false;
 
     public static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("automaticmemories.properties");
 
@@ -24,11 +25,12 @@ public class Configuration {
             Properties properties = new Properties(1);
             properties.load(reader);
 
-            Configuration.INTERVAL_MS = Math.max(0, Long.parseLong(properties.getProperty("interval_ms", String.valueOf(INTERVAL_MS))));
+            INTERVAL_MS = Math.max(0, Long.parseLong(properties.getProperty("interval_ms", String.valueOf(INTERVAL_MS))));
 
             long leftoverIntervalMs = Long.parseLong(properties.getProperty("leftover_interval_ms", String.valueOf(LEFTOVER_INTERVAL_MS)));
-            Configuration.LEFTOVER_INTERVAL_MS = Math.min(Math.max(0, leftoverIntervalMs), Configuration.INTERVAL_MS);
+            LEFTOVER_INTERVAL_MS = Math.min(Math.max(0, leftoverIntervalMs), INTERVAL_MS);
 
+            RESTART_TIMER_EACH_SESSION = Boolean.parseBoolean(properties.getProperty("restart_timer_each_session", String.valueOf(RESTART_TIMER_EACH_SESSION)));
         } catch (Exception ignored) {}
     }
 
@@ -37,6 +39,7 @@ public class Configuration {
 
         properties.put("interval_ms", String.valueOf(INTERVAL_MS));
         properties.put("leftover_interval_ms", String.valueOf(LEFTOVER_INTERVAL_MS));
+        properties.put("restart_timer_each_session", String.valueOf(RESTART_TIMER_EACH_SESSION));
 
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             properties.store(writer, "AutomaticMemories config");

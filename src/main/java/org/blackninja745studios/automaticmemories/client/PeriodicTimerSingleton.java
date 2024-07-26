@@ -30,10 +30,9 @@ public class PeriodicTimerSingleton {
 
             @Override
             public void run() {
-                if (client.player != null) {
-                    LogManager.getLogger(AutomaticMemories.class).warn("took screenshot");
+                if (client != null && client.getFramebuffer() != null)
                     takeScreenshot(client);
-                }
+
                 lastScreenshotTime = Instant.now();
             }
         }, delayBeforeFirst, intervalMs);
@@ -53,7 +52,10 @@ public class PeriodicTimerSingleton {
                 client.runDirectory,
                 client.getFramebuffer(),
                 message -> client.execute(
-                        () -> client.inGameHud.getChatHud().addMessage(message)
+                        () -> {
+                            if (client.inGameHud != null)
+                                client.inGameHud.getChatHud().addMessage(message);
+                        }
                 )
         );
     }
