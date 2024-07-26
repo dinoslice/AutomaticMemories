@@ -5,7 +5,12 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.Text;
+import org.apache.logging.log4j.LogManager;
+import org.blackninja745studios.automaticmemories.AutomaticMemories;
+import org.blackninja745studios.automaticmemories.client.AutomaticMemoriesClient;
+import org.blackninja745studios.automaticmemories.client.PeriodicTimerSingleton;
 
 import java.util.Optional;
 
@@ -25,7 +30,11 @@ public class ModMenuIntegration implements ModMenuApi {
                 entryBuilder.startLongField(Text.translatable("automaticmemories.config.interval_ms"), Configuration.INTERVAL_MS)
                     .setDefaultValue(3600 * 1000)
                     .setMin(5 * 1000)
-                    .setSaveConsumer(l -> Configuration.INTERVAL_MS = l)
+                    .setSaveConsumer(l -> {
+                        Configuration.INTERVAL_MS = l;
+                        LogManager.getLogger(AutomaticMemories.class).warn("set new delay");
+                        PeriodicTimerSingleton.restartOrStartTimer(0, l);
+                    })
                     .setTooltip(Optional.of(new Text[] {
                         Text.translatable("automaticmemories.config.interval_ms.tooltip.main"),
                         Text.translatable("automaticmemories.config.interval_ms.tooltip.minimum"),

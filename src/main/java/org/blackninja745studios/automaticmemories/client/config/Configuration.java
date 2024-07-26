@@ -18,18 +18,15 @@ public class Configuration {
 
     public static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("automaticmemories.properties");
 
-    static { loadFromFile(CONFIG_PATH); }
-
     public static void loadFromFile(Path path) {
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             Properties properties = new Properties(1);
             properties.load(reader);
 
             Configuration.INTERVAL_MS = Long.parseLong(properties.getProperty("interval_ms", String.valueOf(INTERVAL_MS)));
+        } catch (Exception ignored) {}
 
-        } catch (Exception ignored) {
-            saveToFile(path);
-        }
+        saveToFile(path);
     }
 
     public static void saveToFile(Path path) {
