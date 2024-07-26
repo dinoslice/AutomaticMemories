@@ -15,9 +15,6 @@
     "client": [
       "org.blackninja745studios.automaticmemories.client.AutomaticMemoriesClient"
     ],
-    "main": [
-      "org.blackninja745studios.automaticmemories.AutomaticMemories"
-    ],
     "modmenu": [
       "org.blackninja745studios.automaticmemories.client.config.ModMenuIntegration"
     ]
