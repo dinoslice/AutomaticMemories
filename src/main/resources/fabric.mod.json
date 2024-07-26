@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "automaticmemories",
+  "version": "${version}",
+  "name": "AutomaticMemories",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/BlackNinja745/AutomaticMemoriesutomaticMemories"
+  },
+  "license": "GPL-3.0",
+  "icon": "assets/automaticmemories/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "org.blackninja745studios.automaticmemories.client.AutomaticMemoriesClient"
+    ],
+    "main": [
+      "org.blackninja745studios.automaticmemories.AutomaticMemories"
+    ],
+    "modmenu": [
+      "org.blackninja745studios.automaticmemories.client.config.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "automaticmemories.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}",
+    "modmenu": ">=5.1.0",
+    "cloth-config2": ">=9.1.104"
+  }
+}
