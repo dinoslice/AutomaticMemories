@@ -1,6 +1,5 @@
 package org.blackninja745studios.automaticmemories.client.config;
 
-import net.minecraft.client.MinecraftClient;
 import org.blackninja745studios.automaticmemories.AutomaticMemories;
 
 import net.fabricmc.loader.api.FabricLoader;
@@ -20,7 +19,7 @@ public class Configuration {
     public static long LEFTOVER_INTERVAL_MS = 0;
     public static boolean RESTART_TIMER_EACH_SESSION = false;
 
-    private static File SAVE_DIRECTORY = new File("screenshots");
+    public static String SAVE_DIRECTORY = "screenshots";
 
     public static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("automaticmemories.properties");
 
@@ -38,7 +37,7 @@ public class Configuration {
 
             RESTART_TIMER_EACH_SESSION = Boolean.parseBoolean(properties.getProperty("restart_timer_each_session", String.valueOf(RESTART_TIMER_EACH_SESSION)));
 
-            setSaveDirectory( new File(properties.getProperty("save_directory", SAVE_DIRECTORY.toString())) );
+            SAVE_DIRECTORY = properties.getProperty("save_directory", SAVE_DIRECTORY);
         } catch (Exception ignored) {}
     }
 
@@ -49,7 +48,7 @@ public class Configuration {
         properties.put("leftover_interval_ms", String.valueOf(LEFTOVER_INTERVAL_MS));
         properties.put("restart_timer_each_session", String.valueOf(RESTART_TIMER_EACH_SESSION));
 
-        properties.put("save_directory", SAVE_DIRECTORY.toString());
+        properties.put("save_directory", SAVE_DIRECTORY);
 
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             properties.store(writer, "AutomaticMemories config");
@@ -58,18 +57,13 @@ public class Configuration {
         }
     }
 
-    public static void setSaveDirectory(File path) {
-        if (path.isDirectory()) {
-            SAVE_DIRECTORY = path;
-        } else {
-            LogManager.getLogger(AutomaticMemories.class).error(
-                String.format("%s isn't a directory, defaulting to default screenshot location.", path)
-            );
-            SAVE_DIRECTORY = new File("screenshots");
-        }
-    }
+    public static File getFullDirectory(File runDirectory, String saveDirectory) {
+        File saveDir = new File(saveDirectory);
 
-    public static File getSaveDirectory() {
-        return SAVE_DIRECTORY;
+        if (!saveDir.isAbsolute()) {
+            saveDir = new File(runDirectory, saveDirectory);
+        }
+
+        return saveDir;
     }
 }

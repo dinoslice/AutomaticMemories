@@ -1,11 +1,11 @@
 package org.blackninja745studios.automaticmemories.client;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.ScreenshotRecorder;
 import org.apache.logging.log4j.LogManager;
 import org.blackninja745studios.automaticmemories.AutomaticMemories;
 import org.blackninja745studios.automaticmemories.client.config.Configuration;
 
+import java.io.File;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Timer;
@@ -48,15 +48,19 @@ public class PeriodicTimerSingleton {
     }
 
     private static void takeScreenshot(MinecraftClient client) {
-        ScreenshotRecorder.saveScreenshot(
-                client.runDirectory,
+        File saveDirectory = Configuration.getFullDirectory(client.runDirectory, Configuration.SAVE_DIRECTORY);
+
+        boolean showMessage = true;
+        String prefix = "auto_";
+
+        ScreenshotRecorderExt.saveScreenshot(
+                saveDirectory,
+                prefix,
                 client.getFramebuffer(),
-                message -> client.execute(
-                        () -> {
-                            if (client.inGameHud != null)
-                                client.inGameHud.getChatHud().addMessage(message);
-                        }
-                )
+                msg -> client.execute(() -> {
+                    if (client.inGameHud != null && showMessage)
+                        client.inGameHud.getChatHud().addMessage(msg);
+                })
         );
     }
 

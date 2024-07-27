@@ -5,6 +5,7 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
 import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import org.apache.logging.log4j.LogManager;
@@ -12,6 +13,8 @@ import org.blackninja745studios.automaticmemories.AutomaticMemories;
 import org.blackninja745studios.automaticmemories.client.PeriodicTimerSingleton;
 
 import java.io.File;
+import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.Optional;
 
 public class ModMenuIntegration implements ModMenuApi {
@@ -63,16 +66,36 @@ public class ModMenuIntegration implements ModMenuApi {
                     .build()
             );
 
-
             ConfigCategory saveCategory = builder.getOrCreateCategory(Text.translatable("automaticmemories.config.save.category"));
 
             saveCategory.addEntry(
-                entryBuilder.startTextField(Text.translatable("automaticmemories.config.save.save_directory"), Configuration.getSaveDirectory().toString())
-                    .setDefaultValue("")
-                    .setSaveConsumer(s -> Configuration.setSaveDirectory(new File(s)))
-                    .setTooltip(Optional.of(new Text[] {
-                            Text.translatable("automaticmemories.config.save.use_default_screenshot_directory.tooltip")
-                    }))
+                entryBuilder.startTextField(Text.translatable("automaticmemories.config.save.save_directory"), Configuration.SAVE_DIRECTORY)
+                    .setDefaultValue("screenshots")
+                    .setSaveConsumer(s -> Configuration.SAVE_DIRECTORY = s)
+                    .setErrorSupplier(s -> {
+                        try {
+                            Paths.get(s);
+                        } catch (Exception e) {
+                            return Optional.of(Text.translatable("automaticmemories.config.save.save_directory.error", e.getMessage()));
+                        }
+                        return Optional.empty();
+                    })
+                    .setTooltipSupplier(s -> {
+                        File runDir = MinecraftClient.getInstance().runDirectory;
+
+                        Text main = Text.translatable("automaticmemories.config.save.save_directory.tooltip.main");
+
+                        Text current = Text.translatable("automaticmemories.config.save.save_directory.tooltip.editing", Configuration.getFullDirectory(runDir, s))
+                                .formatted(Formatting.GOLD);
+
+                        Text remaining = Text.translatable("automaticmemories.config.save.save_directory.tooltip.current",
+                                Configuration.getFullDirectory(runDir, Configuration.SAVE_DIRECTORY)
+                        ).formatted(Formatting.GRAY);
+
+                        return Configuration.SAVE_DIRECTORY.equals(s) ?
+                                Optional.of(new Text[] { main, remaining }) :
+                                Optional.of(new Text[] { main, current, remaining });
+                    })
                     .build()
             );
 
