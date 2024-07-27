@@ -45,7 +45,7 @@ public class ScreenshotRecorderExt {
 
 
             } catch (Exception e) {
-                AutomaticMemoriesClient.LOGGER.error("Couldn't save screenshot", e);
+                AutomaticMemories.LOGGER.error("Couldn't save screenshot", e);
 
                 // TODO: add colored [AutomaticMemories]
                 messageReceiver.accept(Text.translatable("automaticmemories.screenshot.failure", e.getMessage()).formatted(Formatting.RED));

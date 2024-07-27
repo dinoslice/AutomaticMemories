@@ -6,8 +6,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.blackninja745studios.automaticmemories.client.config.Configuration;
 
-public class AutomaticMemoriesClient implements ClientModInitializer {
-    public static final Logger LOGGER = LogManager.getLogger(AutomaticMemoriesClient.class);
+public class AutomaticMemories implements ClientModInitializer {
+    public static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public void onInitializeClient() {

@@ -1,11 +1,8 @@
 package org.blackninja745studios.automaticmemories.client;
 
 import net.minecraft.client.MinecraftClient;
-import org.apache.logging.log4j.LogManager;
-import org.blackninja745studios.automaticmemories.AutomaticMemories;
 import org.blackninja745studios.automaticmemories.client.config.Configuration;
 
-import java.io.File;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Timer;

@@ -13,7 +13,7 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "org.blackninja745studios.automaticmemories.client.AutomaticMemoriesClient"
+      "org.blackninja745studios.automaticmemories.client.AutomaticMemories"
     ],
     "modmenu": [
       "org.blackninja745studios.automaticmemories.client.config.ModMenuIntegration"
