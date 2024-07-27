@@ -1,9 +1,7 @@
 package org.blackninja745studios.automaticmemories.client.config;
 
-import org.blackninja745studios.automaticmemories.AutomaticMemories;
-
+import org.blackninja745studios.automaticmemories.client.AutomaticMemoriesClient;
 import net.fabricmc.loader.api.FabricLoader;
-import org.apache.logging.log4j.LogManager;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -64,7 +62,7 @@ public class Configuration {
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             properties.store(writer, "AutomaticMemories config");
         } catch (IOException exception) {
-            LogManager.getLogger(AutomaticMemories.class).error(exception.getMessage(), exception);
+            AutomaticMemoriesClient.LOGGER.error(exception.getMessage(), exception);
         }
     }
 

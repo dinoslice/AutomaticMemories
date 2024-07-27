@@ -37,7 +37,6 @@ public class ModMenuIntegration implements ModMenuApi {
                         .setMin(5 * 1000)
                         .setSaveConsumer(l -> {
                             Configuration.INTERVAL_MS = l;
-                            LogManager.getLogger(AutomaticMemories.class).warn("set new delay");
                             PeriodicTimerSingleton.restartOrStartTimer(0, l);
                         })
                         .setTooltipSupplier(l -> {

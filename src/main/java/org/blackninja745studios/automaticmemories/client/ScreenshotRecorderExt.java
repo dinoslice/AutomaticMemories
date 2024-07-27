@@ -8,8 +8,6 @@ import net.minecraft.text.ClickEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Util;
-import org.apache.logging.log4j.LogManager;
-import org.blackninja745studios.automaticmemories.AutomaticMemories;
 import org.blackninja745studios.automaticmemories.client.config.Configuration;
 
 import java.io.File;
@@ -47,7 +45,7 @@ public class ScreenshotRecorderExt {
 
 
             } catch (Exception e) {
-                LogManager.getLogger(AutomaticMemories.class).warn("Couldn't save screenshot", e);
+                AutomaticMemoriesClient.LOGGER.error("Couldn't save screenshot", e);
 
                 // TODO: add colored [AutomaticMemories]
                 messageReceiver.accept(Text.translatable("automaticmemories.screenshot.failure", e.getMessage()).formatted(Formatting.RED));

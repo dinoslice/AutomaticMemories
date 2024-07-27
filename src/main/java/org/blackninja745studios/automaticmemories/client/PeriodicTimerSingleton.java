@@ -19,8 +19,6 @@ public class PeriodicTimerSingleton {
     private static Instant lastScreenshotTime = Instant.now();
 
     public static void restartOrStartTimer(long delayBeforeFirst, long intervalMs) {
-        LogManager.getLogger(AutomaticMemories.class).warn("starting new timer");
-
         cancelTimer();
         periodicTimer = new Timer();
         lastScreenshotTime = Instant.now().minusMillis(Configuration.INTERVAL_MS - delayBeforeFirst);
