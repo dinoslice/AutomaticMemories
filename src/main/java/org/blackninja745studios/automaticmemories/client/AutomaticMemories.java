@@ -2,6 +2,9 @@ package org.blackninja745studios.automaticmemories.client;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.blackninja745studios.automaticmemories.client.config.Configuration;
@@ -26,5 +29,14 @@ public class AutomaticMemories implements ClientModInitializer {
             Configuration.LEFTOVER_INTERVAL_MS = Configuration.INTERVAL_MS - PeriodicTimerSingleton.timeSinceLastScreenshot();
             Configuration.saveToFile(Configuration.CONFIG_PATH);
         });
+    }
+
+    public static MutableText addChatPrefix(Text text) {
+        return Text.literal("")
+            .append(Text.literal("[").formatted(Formatting.DARK_GRAY))
+            .append(Text.translatable("automaticmemories.chat_prefix.first").formatted(Formatting.LIGHT_PURPLE))
+            .append(Text.translatable("automaticmemories.chat_prefix.second").formatted(Formatting.BLUE))
+            .append(Text.literal("] ").formatted(Formatting.DARK_GRAY))
+            .append(text);
     }
 }

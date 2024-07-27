@@ -38,9 +38,11 @@ public class ScreenshotRecorderExt {
                     ));
 
                 // TODO: add colored [AutomaticMemories]
-                messageReceiver.accept(Text.translatable(
-                    "automaticmemories.screenshot.success.full", text,
-                    PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS)
+                messageReceiver.accept(AutomaticMemories.addChatPrefix(
+                    Text.translatable(
+                        "automaticmemories.screenshot.success.full",text,
+                        PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS)
+                    )
                 ));
 
 
@@ -48,7 +50,9 @@ public class ScreenshotRecorderExt {
                 AutomaticMemories.LOGGER.error("Couldn't save screenshot", e);
 
                 // TODO: add colored [AutomaticMemories]
-                messageReceiver.accept(Text.translatable("automaticmemories.screenshot.failure", e.getMessage()).formatted(Formatting.RED));
+                messageReceiver.accept(AutomaticMemories.addChatPrefix(
+                    Text.translatable("automaticmemories.screenshot.failure", e.getMessage()).formatted(Formatting.RED)
+                ));
             } finally {
                 nativeImage.close();
             }

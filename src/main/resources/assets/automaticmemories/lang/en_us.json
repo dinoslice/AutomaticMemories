@@ -1,4 +1,7 @@
 {
+  "automaticmemories.chat_prefix.first": "Automatic",
+  "automaticmemories.chat_prefix.second": "Memories",
+
   "automaticmemories.config.title": "Automatic Memories",
 
   "automaticmemories.config.interval.category": "Interval Configuration",
