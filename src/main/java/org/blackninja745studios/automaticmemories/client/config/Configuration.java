@@ -20,6 +20,9 @@ public class Configuration {
     public static boolean RESTART_TIMER_EACH_SESSION = false;
 
     public static String SAVE_DIRECTORY = "screenshots";
+    public static String SCREENSHOT_PREFIX = "auto_";
+
+    public static boolean NOTIFY_PLAYER = false;
 
     public static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("automaticmemories.properties");
 
@@ -38,7 +41,12 @@ public class Configuration {
             RESTART_TIMER_EACH_SESSION = Boolean.parseBoolean(properties.getProperty("restart_timer_each_session", String.valueOf(RESTART_TIMER_EACH_SESSION)));
 
             SAVE_DIRECTORY = properties.getProperty("save_directory", SAVE_DIRECTORY);
-        } catch (Exception ignored) {}
+            SCREENSHOT_PREFIX = properties.getProperty("screenshot_prefix", SCREENSHOT_PREFIX);
+
+            NOTIFY_PLAYER = Boolean.parseBoolean(properties.getProperty("notify_player", String.valueOf(NOTIFY_PLAYER)));
+        } catch (Exception ignored) {
+            saveToFile(path);
+        }
     }
 
     public static void saveToFile(Path path) {
@@ -49,6 +57,9 @@ public class Configuration {
         properties.put("restart_timer_each_session", String.valueOf(RESTART_TIMER_EACH_SESSION));
 
         properties.put("save_directory", SAVE_DIRECTORY);
+        properties.put("screenshot_prefix", SCREENSHOT_PREFIX);
+
+        properties.put("notify_player", String.valueOf(NOTIFY_PLAYER));
 
         try (BufferedWriter writer = Files.newBufferedWriter(path)) {
             properties.store(writer, "AutomaticMemories config");

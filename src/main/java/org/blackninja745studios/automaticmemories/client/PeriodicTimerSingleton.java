@@ -48,17 +48,12 @@ public class PeriodicTimerSingleton {
     }
 
     private static void takeScreenshot(MinecraftClient client) {
-        File saveDirectory = Configuration.getFullDirectory(client.runDirectory, Configuration.SAVE_DIRECTORY);
-
-        boolean showMessage = true;
-        String prefix = "auto_";
-
         ScreenshotRecorderExt.saveScreenshot(
-                saveDirectory,
-                prefix,
+                Configuration.getFullDirectory(client.runDirectory, Configuration.SAVE_DIRECTORY),
+                Configuration.SCREENSHOT_PREFIX,
                 client.getFramebuffer(),
                 msg -> client.execute(() -> {
-                    if (client.inGameHud != null && showMessage)
+                    if (client.inGameHud != null && Configuration.NOTIFY_PLAYER)
                         client.inGameHud.getChatHud().addMessage(msg);
                 })
         );

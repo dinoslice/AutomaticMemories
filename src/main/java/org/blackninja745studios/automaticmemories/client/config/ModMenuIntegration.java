@@ -14,7 +14,6 @@ import org.blackninja745studios.automaticmemories.client.PeriodicTimerSingleton;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.Objects;
 import java.util.Optional;
 
 public class ModMenuIntegration implements ModMenuApi {
@@ -96,6 +95,28 @@ public class ModMenuIntegration implements ModMenuApi {
                                 Optional.of(new Text[] { main, remaining }) :
                                 Optional.of(new Text[] { main, current, remaining });
                     })
+                    .build()
+            );
+
+            saveCategory.addEntry(
+                entryBuilder.startTextField(Text.translatable("automaticmemories.config.save.screenshot_prefix"), Configuration.SCREENSHOT_PREFIX)
+                    .setDefaultValue("auto_")
+                    .setSaveConsumer(s -> Configuration.SCREENSHOT_PREFIX = s)
+                    .setTooltip(Optional.of(new Text[] {
+                        Text.translatable("automaticmemories.config.save.screenshot_prefix.tooltip")
+                    }))
+                    .build()
+            );
+
+            ConfigCategory miscCategory = builder.getOrCreateCategory(Text.translatable("automaticmemories.config.miscellaneous.category"));
+
+            miscCategory.addEntry(
+                entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.miscellaneous.notify_player"), Configuration.NOTIFY_PLAYER)
+                    .setSaveConsumer(b -> Configuration.NOTIFY_PLAYER = b)
+                    .setDefaultValue(false)
+                    .setTooltip(Optional.of(new Text[] {
+                        Text.translatable("automaticmemories.config.miscellaneous.notify_player")
+                    }))
                     .build()
             );
 

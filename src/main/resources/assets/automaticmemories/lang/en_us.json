@@ -1,13 +1,13 @@
 {
   "automaticmemories.config.title": "Automatic Memories",
 
-  "automaticmemories.config.interval.category": "Auto Screenshot Interval Configuration",
+  "automaticmemories.config.interval.category": "Interval Configuration",
   "automaticmemories.config.interval.interval_ms": "Automatic screenshot interval (ms)",
   "automaticmemories.config.interval.interval_ms.tooltip.main": "Milliseconds between each automatic screenshot",
   "automaticmemories.config.interval.interval_ms.tooltip.editing": "Currently editing to: %s",
   "automaticmemories.config.interval.interval_ms.tooltip.remaining": "Time until next screenshot: %s/%s",
   "automaticmemories.config.interval.restart_timer_each_session": "Restart the timer each session",
-  "automaticmemories.config.interval.restart_timer_each_session.tooltip": "If false, remaining time on the timer will carry over to the next time you play.",
+  "automaticmemories.config.interval.restart_timer_each_session.tooltip": "If false, remaining time on the timer will carry over to the next time you play",
 
   "automaticmemories.config.save.category": "Screenshot Saving Configuration",
   "automaticmemories.config.save.save_directory": "Save Directory",
@@ -15,6 +15,12 @@
   "automaticmemories.config.save.save_directory.tooltip.editing": "Currently editing to: %s",
   "automaticmemories.config.save.save_directory.tooltip.current": "Saving to: %s",
   "automaticmemories.config.save.save_directory.error": "Invalid path: %s",
+  "automaticmemories.config.save.screenshot_prefix": "Screenshot Prefix",
+  "automaticmemories.config.save.screenshot_prefix.tooltip": "Prefix to add to automatic screenshots",
+
+  "automaticmemories.config.miscellaneous.category": "Miscellaneous",
+  "automaticmemories.config.miscellaneous.notify_player": "Notify Player",
+  "automaticmemories.config.miscellaneous.notify_player.tooltip": "Sends a client-side message when an automatic screenshot is taken.",
 
   "automaticmemories.screenshot.success.full": "Automatically saved %s, next screenshot in %s.",
   "automaticmemories.screenshot.success.clickable": "screenshot",
