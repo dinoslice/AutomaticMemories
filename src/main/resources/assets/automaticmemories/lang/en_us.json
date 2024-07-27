@@ -9,11 +9,14 @@
   "automaticmemories.config.interval.restart_timer_each_session": "Restart the timer each session",
   "automaticmemories.config.interval.restart_timer_each_session.tooltip": "If false, remaining time on the timer will carry over to the next time you play.",
 
+  "automaticmemories.config.save.category": "Screenshot Saving Configuration",
   "automaticmemories.config.save.save_directory": "Save Directory",
   "automaticmemories.config.save.save_directory.tooltip.main": "Path to save automatic screenshots to",
   "automaticmemories.config.save.save_directory.tooltip.editing": "Currently editing to: %s",
   "automaticmemories.config.save.save_directory.tooltip.current": "Saving to: %s",
   "automaticmemories.config.save.save_directory.error": "Invalid path: %s",
 
+  "automaticmemories.screenshot.success.full": "Automatically saved %s, next screenshot in %s.",
+  "automaticmemories.screenshot.success.clickable": "screenshot",
   "automaticmemories.screenshot.failure": "Couldn't save automatic screenshot: %s"
 }

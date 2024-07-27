@@ -33,14 +33,15 @@ public class ScreenshotRecorderExt {
             try {
                 nativeImage.writeTo(screenshotFile);
 
-                Text text = Text.literal(screenshotFile.getName()).formatted(Formatting.UNDERLINE)
+                Text text = Text.translatable("automaticmemories.screenshot.success.clickable")
+                    .formatted(Formatting.UNDERLINE)
                     .styled(style -> style.withClickEvent(
                         new ClickEvent(ClickEvent.Action.OPEN_FILE, screenshotFile.getAbsolutePath())
                     ));
 
                 // TODO: add colored [AutomaticMemories]
                 messageReceiver.accept(Text.translatable(
-                    "automaticmemories.screenshot.success", text,
+                    "automaticmemories.screenshot.success.full", text,
                     PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS)
                 ));
 
