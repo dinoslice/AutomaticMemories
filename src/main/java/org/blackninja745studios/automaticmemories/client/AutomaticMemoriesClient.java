@@ -6,6 +6,9 @@ import org.apache.logging.log4j.LogManager;
 import org.blackninja745studios.automaticmemories.AutomaticMemories;
 import org.blackninja745studios.automaticmemories.client.config.Configuration;
 
+import java.io.File;
+import java.io.FileWriter;
+
 public class AutomaticMemoriesClient implements ClientModInitializer {
 
     @Override
@@ -19,6 +22,15 @@ public class AutomaticMemoriesClient implements ClientModInitializer {
             Configuration.LEFTOVER_INTERVAL_MS = 0;
             Configuration.saveToFile(Configuration.CONFIG_PATH);
         }
+
+        File path = new File("memories");
+
+        boolean _res = path.mkdirs();
+        File f = new File(path, "file_test.txt");
+
+        try (FileWriter fileWriter = new FileWriter(f)) {
+            fileWriter.write("message w");
+        } catch (Exception ignored) {}
 
         ClientLifecycleEvents.CLIENT_STOPPING.register(client -> {
             Configuration.LEFTOVER_INTERVAL_MS = Configuration.INTERVAL_MS - PeriodicTimerSingleton.timeSinceLastScreenshot();

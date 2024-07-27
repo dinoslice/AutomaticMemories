@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.blackninja745studios.automaticmemories.AutomaticMemories;
 import org.blackninja745studios.automaticmemories.client.PeriodicTimerSingleton;
 
+import java.io.File;
 import java.util.Optional;
 
 public class ModMenuIntegration implements ModMenuApi {
@@ -23,10 +24,10 @@ public class ModMenuIntegration implements ModMenuApi {
                     .setParentScreen(parent);
 
             ConfigEntryBuilder entryBuilder = builder.entryBuilder();
-            ConfigCategory category = builder.getOrCreateCategory(Text.translatable("automaticmemories.config.category"));
+            ConfigCategory intervalCategory = builder.getOrCreateCategory(Text.translatable("automaticmemories.config.interval.category"));
 
-            category.addEntry(
-                entryBuilder.startLongField(Text.translatable("automaticmemories.config.interval_ms"), Configuration.INTERVAL_MS)
+            intervalCategory.addEntry(
+                entryBuilder.startLongField(Text.translatable("automaticmemories.config.interval.interval_ms"), Configuration.INTERVAL_MS)
                     .setDefaultValue(3600 * 1000)
                     .setMin(5 * 1000)
                     .setSaveConsumer(l -> {
@@ -35,12 +36,12 @@ public class ModMenuIntegration implements ModMenuApi {
                         PeriodicTimerSingleton.restartOrStartTimer(0, l);
                     })
                     .setTooltipSupplier(l -> {
-                        Text main = Text.translatable("automaticmemories.config.interval_ms.tooltip.main");
+                        Text main = Text.translatable("automaticmemories.config.interval.interval_ms.tooltip.main");
 
-                        Text current = Text.translatable("automaticmemories.config.interval_ms.tooltip.editing", PeriodicTimerSingleton.formatTime(l))
+                        Text current = Text.translatable("automaticmemories.config.interval.interval_ms.tooltip.editing", PeriodicTimerSingleton.formatTime(l))
                                 .formatted(Formatting.GOLD);
 
-                        Text remaining = Text.translatable("automaticmemories.config.interval_ms.tooltip.remaining",
+                        Text remaining = Text.translatable("automaticmemories.config.interval.interval_ms.tooltip.remaining",
                                 PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS - PeriodicTimerSingleton.timeSinceLastScreenshot()),
                                 PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS)
                         ).formatted(Formatting.GRAY);
@@ -52,12 +53,25 @@ public class ModMenuIntegration implements ModMenuApi {
                     .build()
             );
 
-            category.addEntry(
-                entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.restart_timer_each_session"), Configuration.RESTART_TIMER_EACH_SESSION)
+            intervalCategory.addEntry(
+                entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.interval.restart_timer_each_session"), Configuration.RESTART_TIMER_EACH_SESSION)
                     .setDefaultValue(false)
                     .setSaveConsumer(b -> Configuration.RESTART_TIMER_EACH_SESSION = b)
                     .setTooltip(Optional.of(new Text[] {
-                        Text.translatable("automaticmemories.config.restart_timer_each_session.tooltip")
+                        Text.translatable("automaticmemories.config.interval.restart_timer_each_session.tooltip")
+                    }))
+                    .build()
+            );
+
+
+            ConfigCategory saveCategory = builder.getOrCreateCategory(Text.translatable("automaticmemories.config.save.category"));
+
+            saveCategory.addEntry(
+                entryBuilder.startTextField(Text.translatable("automaticmemories.config.save.save_directory"), Configuration.getSaveDirectory().toString())
+                    .setDefaultValue("")
+                    .setSaveConsumer(s -> Configuration.setSaveDirectory(new File(s)))
+                    .setTooltip(Optional.of(new Text[] {
+                            Text.translatable("automaticmemories.config.save.use_default_screenshot_directory.tooltip")
                     }))
                     .build()
             );

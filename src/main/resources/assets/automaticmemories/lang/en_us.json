@@ -1,10 +1,11 @@
 {
   "automaticmemories.config.title": "Automatic Memories",
-  "automaticmemories.config.category": "Automatic Screenshots Configuration",
-  "automaticmemories.config.interval_ms": "Automatic screenshot interval (ms)",
-  "automaticmemories.config.interval_ms.tooltip.main": "Milliseconds between each automatic screenshot",
-  "automaticmemories.config.interval_ms.tooltip.editing": "Currently editing to: %s",
-  "automaticmemories.config.interval_ms.tooltip.remaining": "Time until next screenshot: %s/%s",
-  "automaticmemories.config.restart_timer_each_session": "Restart the timer each session",
-  "automaticmemories.config.restart_timer_each_session.tooltip": "If false, remaining time on the timer will carry over to the next time you play."
+
+  "automaticmemories.config.interval.category": "Auto Screenshot Interval Configuration",
+  "automaticmemories.config.interval.interval_ms": "Automatic screenshot interval (ms)",
+  "automaticmemories.config.interval.interval_ms.tooltip.main": "Milliseconds between each automatic screenshot",
+  "automaticmemories.config.interval.interval_ms.tooltip.editing": "Currently editing to: %s",
+  "automaticmemories.config.interval.interval_ms.tooltip.remaining": "Time until next screenshot: %s/%s",
+  "automaticmemories.config.interval.restart_timer_each_session": "Restart the timer each session",
+  "automaticmemories.config.interval.restart_timer_each_session.tooltip": "If false, remaining time on the timer will carry over to the next time you play."
 }
