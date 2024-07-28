@@ -115,7 +115,8 @@ public class ModMenuIntegration implements ModMenuApi {
                         .setSaveConsumer(b -> Configuration.NOTIFY_PLAYER = b)
                         .setDefaultValue(false)
                         .setTooltip(Optional.of(new Text[] {
-                            Text.translatable("automaticmemories.config.miscellaneous.notify_player")
+                            Text.translatable("automaticmemories.config.miscellaneous.notify_player.tooltip.main"),
+                            Text.translatable("automaticmemories.config.miscellaneous.notify_player.tooltip.disabled_warnings")
                         }))
                         .build()
                 ))

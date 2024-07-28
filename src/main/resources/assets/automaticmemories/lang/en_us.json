@@ -23,7 +23,8 @@
 
   "automaticmemories.config.miscellaneous.category": "Miscellaneous",
   "automaticmemories.config.miscellaneous.notify_player": "Notify Player",
-  "automaticmemories.config.miscellaneous.notify_player.tooltip": "Sends a client-side message when an automatic screenshot is taken.",
+  "automaticmemories.config.miscellaneous.notify_player.tooltip.main": "Sends a client-side message when an automatic screenshot is taken.",
+  "automaticmemories.config.miscellaneous.notify_player.tooltip.disabled_warnings": "When this is disabled, errors aren't sent either.",
 
   "automaticmemories.screenshot.success.full": "Automatically saved %s, next screenshot in %s.",
   "automaticmemories.screenshot.success.clickable": "screenshot",
