@@ -40,8 +40,10 @@
   },
   "depends": {
     "minecraft": "${minecraft_version}",
-    "fabric-lifecycle-events-v1": "*",
-    "modmenu": ">=5.1.0",
-    "cloth-config2": ">=9.1.104"
+    "fabric-lifecycle-events-v1": "*"
+  },
+  "recommends": {
+    "modmenu": ">=${modmenu_version}",
+    "cloth-config2": ">=${cloth_config_version}"
   }
 }

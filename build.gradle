@@ -37,22 +37,24 @@ dependencies {
     mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-        // Fabric API. This is technically optional, but you probably want it anyway.
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modImplementation("com.terraformersmc:modmenu:5.1.0")
-    modImplementation("me.shedaniel.cloth:cloth-config-fabric:9.1.104")
+    modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+    modImplementation("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}")
 }
 
 processResources {
     inputs.property "version", project.version
     inputs.property "minecraft_version", project.minecraft_version
     inputs.property "loader_version", project.loader_version
+    inputs.property "modmenu_version", project.modmenu_version
+    inputs.property "cloth_config_version", project.cloth_config_version
     filteringCharset "UTF-8"
 
     filesMatching("fabric.mod.json") {
         expand "version": project.version,
                 "minecraft_version": project.minecraft_version,
-                "loader_version": project.loader_version
+                "loader_version": project.loader_version,
+                "modmenu_version": project.modmenu_version,
+                "cloth_config_version": project.cloth_config_version
     }
 }
 
