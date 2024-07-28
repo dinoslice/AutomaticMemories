@@ -40,11 +40,12 @@ public class ScreenshotRecorderExt {
                 // TODO: add colored [AutomaticMemories]
                 messageReceiver.accept(AutomaticMemories.addChatPrefix(
                     Text.translatable(
-                        "automaticmemories.screenshot.success.full",text,
+                        "automaticmemories.screenshot.success.full", text,
                         PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS)
                     )
                 ));
 
+                AutomaticMemories.LOGGER.info("Saved automatic screenshot as {}, next screenshot in {} ms.", screenshotFile.toString(), Configuration.INTERVAL_MS);
 
             } catch (Exception e) {
                 AutomaticMemories.LOGGER.error("Couldn't save screenshot", e);
