@@ -37,7 +37,6 @@ public class ScreenshotRecorderExt {
                         new ClickEvent(ClickEvent.Action.OPEN_FILE, screenshotFile.getAbsolutePath())
                     ));
 
-                // TODO: add colored [AutomaticMemories]
                 messageReceiver.accept(AutomaticMemories.addChatPrefix(
                     Text.translatable(
                         "automaticmemories.screenshot.success.full", text,
@@ -50,7 +49,6 @@ public class ScreenshotRecorderExt {
             } catch (Exception e) {
                 AutomaticMemories.LOGGER.error("Couldn't save screenshot", e);
 
-                // TODO: add colored [AutomaticMemories]
                 messageReceiver.accept(AutomaticMemories.addChatPrefix(
                     Text.translatable("automaticmemories.screenshot.failure", e.getMessage()).formatted(Formatting.RED)
                 ));
