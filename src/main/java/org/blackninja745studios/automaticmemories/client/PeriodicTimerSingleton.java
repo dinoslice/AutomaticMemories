@@ -53,7 +53,7 @@ public class PeriodicTimerSingleton {
                     Configuration.SCREENSHOT_PREFIX,
                     client.getFramebuffer(),
                     msg -> client.execute(() -> {
-                        if (client.inGameHud != null && Configuration.NOTIFY_PLAYER)
+                        if (Configuration.NOTIFY_PLAYER && client.inGameHud != null && client.world != null)
                             client.inGameHud.getChatHud().addMessage(msg);
                     })
             );
