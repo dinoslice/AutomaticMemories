@@ -60,6 +60,13 @@ public class ModMenuIntegration implements ModMenuApi {
                         .setTooltip(Optional.of(new Text[] {
                                 Text.translatable("automaticmemories.config.interval.restart_timer_each_session.tooltip")
                         }))
+                        .build(),
+                    entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.interval.require_in_world"), Configuration.REQUIRE_IN_WORLD)
+                        .setDefaultValue(true)
+                        .setSaveConsumer(b -> Configuration.REQUIRE_IN_WORLD = b)
+                        .setTooltip(Optional.of(new Text[] {
+                                Text.translatable("automaticmemories.config.interval.require_in_world.tooltip")
+                        }))
                         .build()
                 ))
                 .setExpanded(true)

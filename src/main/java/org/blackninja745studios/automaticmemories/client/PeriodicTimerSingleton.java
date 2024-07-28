@@ -43,15 +43,19 @@ public class PeriodicTimerSingleton {
     }
 
     private static void takeScreenshot(MinecraftClient client) {
-        ScreenshotRecorderExt.saveScreenshot(
-                Configuration.getFullDirectory(client.runDirectory, Configuration.SAVE_DIRECTORY),
-                Configuration.SCREENSHOT_PREFIX,
-                client.getFramebuffer(),
-                msg -> client.execute(() -> {
-                    if (client.inGameHud != null && Configuration.NOTIFY_PLAYER)
-                        client.inGameHud.getChatHud().addMessage(msg);
-                })
-        );
+        boolean worldReq = !Configuration.REQUIRE_IN_WORLD || client.world != null;
+
+        if (worldReq) {
+            ScreenshotRecorderExt.saveScreenshot(
+                    Configuration.getFullDirectory(client.runDirectory, Configuration.SAVE_DIRECTORY),
+                    Configuration.SCREENSHOT_PREFIX,
+                    client.getFramebuffer(),
+                    msg -> client.execute(() -> {
+                        if (client.inGameHud != null && Configuration.NOTIFY_PLAYER)
+                            client.inGameHud.getChatHud().addMessage(msg);
+                    })
+            );
+        }
     }
 
     public static String formatTime(long millis) {

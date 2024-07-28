@@ -16,6 +16,7 @@ public class Configuration {
     public static long INTERVAL_MS = 3600 * 1000;
     public static long LEFTOVER_INTERVAL_MS = 0;
     public static boolean RESTART_TIMER_EACH_SESSION = false;
+    public static boolean REQUIRE_IN_WORLD = true;
 
     public static String SAVE_DIRECTORY = "screenshots";
     public static String SCREENSHOT_PREFIX = "auto_";
@@ -37,6 +38,7 @@ public class Configuration {
             LEFTOVER_INTERVAL_MS = Math.min(Math.max(0, leftoverIntervalMs), INTERVAL_MS);
 
             RESTART_TIMER_EACH_SESSION = Boolean.parseBoolean(properties.getProperty("restart_timer_each_session", String.valueOf(RESTART_TIMER_EACH_SESSION)));
+            REQUIRE_IN_WORLD = Boolean.parseBoolean(properties.getProperty("require_in_world", String.valueOf(REQUIRE_IN_WORLD)));
 
             SAVE_DIRECTORY = properties.getProperty("save_directory", SAVE_DIRECTORY);
             SCREENSHOT_PREFIX = properties.getProperty("screenshot_prefix", SCREENSHOT_PREFIX);
@@ -53,6 +55,7 @@ public class Configuration {
         properties.put("interval_ms", String.valueOf(INTERVAL_MS));
         properties.put("leftover_interval_ms", String.valueOf(LEFTOVER_INTERVAL_MS));
         properties.put("restart_timer_each_session", String.valueOf(RESTART_TIMER_EACH_SESSION));
+        properties.put("require_in_world", String.valueOf(REQUIRE_IN_WORLD));
 
         properties.put("save_directory", SAVE_DIRECTORY);
         properties.put("screenshot_prefix", SCREENSHOT_PREFIX);
