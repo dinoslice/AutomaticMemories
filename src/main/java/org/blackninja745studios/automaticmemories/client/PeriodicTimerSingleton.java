@@ -45,7 +45,9 @@ public class PeriodicTimerSingleton {
     private static void takeScreenshot(MinecraftClient client) {
         boolean worldReq = !Configuration.REQUIRE_IN_WORLD || client.world != null;
 
-        if (worldReq) {
+        boolean unpausedReq = !Configuration.REQUIRE_UNPAUSED || client.world == null || !client.isPaused();
+
+        if (worldReq && unpausedReq) {
             ScreenshotRecorderExt.saveScreenshot(
                     Configuration.getFullDirectory(client.runDirectory, Configuration.SAVE_DIRECTORY),
                     Configuration.SCREENSHOT_PREFIX,

@@ -14,7 +14,8 @@
   "automaticmemories.config.interval.restart_timer_each_session.tooltip": "If false, remaining time on the timer will carry over to the next time you play",
   "automaticmemories.config.interval.require_in_world": "Skip when not in world",
   "automaticmemories.config.interval.require_in_world.tooltip": "If true, only takes a screenshot when currently in a world or server",
-
+  "automaticmemories.config.interval.require_unpaused": "Skip when paused",
+  "automaticmemories.config.interval.require_unpaused.tooltip": "If true, only takes a screenshot when the game is unpaused",
 
   "automaticmemories.config.save.subcategory": "Screenshot Saving Configuration",
   "automaticmemories.config.save.save_directory": "Save Directory",
