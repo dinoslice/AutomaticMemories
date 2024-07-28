@@ -19,9 +19,6 @@
       "org.blackninja745studios.automaticmemories.client.config.ModMenuIntegration"
     ]
   },
-  "mixins": [
-    "automaticmemories.mixins.json"
-  ],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
