@@ -3,7 +3,7 @@
   "id": "automaticmemories",
   "version": "${version}",
   "name": "AutomaticMemories",
-  "description": "Automatically take screenshots every so often, over time capturing memories of your Minecraft experience.",
+  "description": "Periodically takes screenshots, capturing memories of your Minecraft experience.",
   "authors": [
     {
       "name": "BlackNinja745"
