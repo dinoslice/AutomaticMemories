@@ -3,10 +3,23 @@
   "id": "automaticmemories",
   "version": "${version}",
   "name": "AutomaticMemories",
-  "description": "",
-  "authors": [],
+  "description": "Automatically take screenshots every so often, over time capturing memories of your Minecraft experience.",
+  "authors": [
+    {
+      "name": "BlackNinja745"
+    },
+    {
+      "name": "BlackNinja745 Studios",
+      "contact": {
+        "homepage": "https://bn745studios.com"
+      }
+    }
+  ],
   "contact": {
-    "repo": "https://github.com/BlackNinja745/AutomaticMemoriesutomaticMemories"
+    "issues": "https://github.com/BlackNinja745-Studios/AutomaticMemories/issues",
+    "sources": "https://github.com/BlackNinja745-Studios/AutomaticMemories",
+    "repo": "https://github.com/BlackNinja745-Studios/AutomaticMemories",
+    "homepage": "https://modrinth.com/mod/automaticmemories"
   },
   "license": "GPL-3.0",
   "icon": "assets/automaticmemories/icon.png",
@@ -19,10 +32,18 @@
       "org.blackninja745studios.automaticmemories.client.config.ModMenuIntegration"
     ]
   },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.website": "https://bn745studios.com",
+        "modmenu.discord": "https://discord.bn745studios.com",
+        "modmenu.modrinth": "https://modrinth.com/mod/automaticmemories"
+      }
+    }
+  },
   "depends": {
-    "fabricloader": ">=${loader_version}",
-    "fabric": "*",
     "minecraft": "${minecraft_version}",
+    "fabric-lifecycle-events-v1": "*",
     "modmenu": ">=5.1.0",
     "cloth-config2": ">=9.1.104"
   }
