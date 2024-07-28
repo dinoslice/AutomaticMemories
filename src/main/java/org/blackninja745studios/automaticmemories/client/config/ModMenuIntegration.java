@@ -26,10 +26,10 @@ public class ModMenuIntegration implements ModMenuApi {
 
             ConfigEntryBuilder entryBuilder = builder.entryBuilder();
 
-            ConfigCategory category = builder.getOrCreateCategory(Text.literal("Automatic Screenshot Configuration"));
+            ConfigCategory category = builder.getOrCreateCategory(Text.translatable("automaticmemories.config.category"));
 
             category.addEntry(
-                entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.interval.category"), List.of(
+                entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.interval.subcategory"), List.of(
                     entryBuilder.startLongField(Text.translatable("automaticmemories.config.interval.interval_ms"), Configuration.INTERVAL_MS)
                         .setDefaultValue(3600 * 1000)
                         .setMin(5 * 1000)
@@ -67,7 +67,7 @@ public class ModMenuIntegration implements ModMenuApi {
             );
 
             category.addEntry(
-                entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.save.category"), List.of(
+                entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.save.subcategory"), List.of(
                     entryBuilder.startTextField(Text.translatable("automaticmemories.config.save.save_directory"), Configuration.SAVE_DIRECTORY)
                         .setDefaultValue("screenshots")
                         .setSaveConsumer(s -> Configuration.SAVE_DIRECTORY = s)
@@ -110,7 +110,7 @@ public class ModMenuIntegration implements ModMenuApi {
             );
 
             category.addEntry(
-                entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.miscellaneous.category"), List.of(
+                entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.miscellaneous.subcategory"), List.of(
                     entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.miscellaneous.notify_player"), Configuration.NOTIFY_PLAYER)
                         .setSaveConsumer(b -> Configuration.NOTIFY_PLAYER = b)
                         .setDefaultValue(false)
