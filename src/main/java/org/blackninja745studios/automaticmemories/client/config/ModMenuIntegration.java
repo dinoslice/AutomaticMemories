@@ -8,7 +8,7 @@ import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import org.blackninja745studios.automaticmemories.client.PeriodicTimerSingleton;
+import org.blackninja745studios.automaticmemories.client.ScreenshotTimerSingleton;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -35,17 +35,17 @@ public class ModMenuIntegration implements ModMenuApi {
                         .setMin(5 * 1000)
                         .setSaveConsumer(l -> {
                             Configuration.INTERVAL_MS = l;
-                            PeriodicTimerSingleton.restartOrStartTimer(0, l);
+                            ScreenshotTimerSingleton.restartOrStartTimer(0, Configuration.INTERVAL_MS);
                         })
                         .setTooltipSupplier(l -> {
                             Text main = Text.translatable("automaticmemories.config.interval.interval_ms.tooltip.main");
 
-                            Text current = Text.translatable("automaticmemories.config.interval.interval_ms.tooltip.editing", PeriodicTimerSingleton.formatTime(l))
+                            Text current = Text.translatable("automaticmemories.config.interval.interval_ms.tooltip.editing", ScreenshotTimerSingleton.formatTime(l))
                                     .formatted(Formatting.GOLD);
 
                             Text remaining = Text.translatable("automaticmemories.config.interval.interval_ms.tooltip.remaining",
-                                    PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS - PeriodicTimerSingleton.timeSinceLastScreenshot()),
-                                    PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS)
+                                    ScreenshotTimerSingleton.formatTime(Configuration.INTERVAL_MS - ScreenshotTimerSingleton.timeSinceLastScreenshot()),
+                                    ScreenshotTimerSingleton.formatTime(Configuration.INTERVAL_MS)
                             ).formatted(Formatting.GRAY);
 
                             return l == Configuration.INTERVAL_MS ?

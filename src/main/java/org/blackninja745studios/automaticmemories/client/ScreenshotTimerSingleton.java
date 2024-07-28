@@ -9,18 +9,18 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 // TODO: is this the best way to do this?
-public class PeriodicTimerSingleton {
-    private static Timer periodicTimer;
+public class ScreenshotTimerSingleton {
+    private static Timer timer;
 
     // TODO: eventually change this to the next scheduled time?
     private static Instant lastScreenshotTime = Instant.now();
 
     public static void restartOrStartTimer(long delayBeforeFirst, long intervalMs) {
         cancelTimer();
-        periodicTimer = new Timer();
-        lastScreenshotTime = Instant.now().minusMillis(Configuration.INTERVAL_MS - delayBeforeFirst);
+        timer = new Timer();
+        lastScreenshotTime = Instant.now().minusMillis(intervalMs - delayBeforeFirst);
 
-        periodicTimer.schedule(new TimerTask() {
+        timer.schedule(new TimerTask() {
             private final MinecraftClient client = MinecraftClient.getInstance();
 
             @Override
@@ -34,8 +34,8 @@ public class PeriodicTimerSingleton {
     }
 
     public static void cancelTimer() {
-        if (periodicTimer != null)
-            periodicTimer.cancel();
+        if (timer != null)
+            timer.cancel();
     }
 
     public static long timeSinceLastScreenshot() {

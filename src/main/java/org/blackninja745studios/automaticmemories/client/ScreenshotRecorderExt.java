@@ -40,7 +40,7 @@ public class ScreenshotRecorderExt {
                 messageReceiver.accept(AutomaticMemories.addChatPrefix(
                     Text.translatable(
                         "automaticmemories.screenshot.success.full", text,
-                        PeriodicTimerSingleton.formatTime(Configuration.INTERVAL_MS)
+                        ScreenshotTimerSingleton.formatTime(Configuration.INTERVAL_MS)
                     )
                 ));
 
