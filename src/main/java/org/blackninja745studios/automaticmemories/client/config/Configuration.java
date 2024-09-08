@@ -13,7 +13,7 @@ import java.util.Properties;
 
 
 public class Configuration {
-    public static long INTERVAL_MS = 3600 * 1000;
+    public static long INTERVAL_MS = 3600 * 1000 * 3;
     public static long LEFTOVER_INTERVAL_MS = 0;
     public static boolean RESTART_TIMER_EACH_SESSION = false;
     public static boolean REQUIRE_IN_WORLD = true;

@@ -31,7 +31,7 @@ public class ModMenuIntegration implements ModMenuApi {
             category.addEntry(
                 entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.interval.subcategory"), List.of(
                     entryBuilder.startLongField(Text.translatable("automaticmemories.config.interval.interval_ms"), Configuration.INTERVAL_MS)
-                        .setDefaultValue(3600 * 1000)
+                        .setDefaultValue(3600 * 1000 * 3)
                         .setMin(5 * 1000)
                         .setSaveConsumer(l -> {
                             Configuration.INTERVAL_MS = l;
