@@ -6,7 +6,8 @@
     "ClientAdvancementManagerMixin"
   ],
   "client": [
-    "ClientAdvancementManagerMixin"
+    "ClientAdvancementManagerMixin",
+    "MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1
