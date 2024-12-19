@@ -2,7 +2,6 @@ package org.blackninja745studios.automaticmemories.client
 
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientLifecycleEvents
-import net.minecraft.client.MinecraftClient
 import net.minecraft.text.MutableText
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
@@ -34,7 +33,6 @@ class AutomaticMemories : ClientModInitializer {
         }
 
         ClientLifecycleEvents.CLIENT_STOPPING.register {
-            _: MinecraftClient ->
             Configuration.LEFTOVER_INTERVAL_MS = Configuration.INTERVAL_MS - ScreenshotTimer.timeSinceLastScreenshot()
             Configuration.saveToFile(Configuration.CONFIG_PATH)
         }
