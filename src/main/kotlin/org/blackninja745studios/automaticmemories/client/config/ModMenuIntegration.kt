@@ -123,6 +123,28 @@ class ModMenuIntegration : ModMenuApi {
                 .setExpanded(true)
                 .build()
         )
+
+        category.addEntry(
+            entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.special.subcategory"), listOf(
+                entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.special.advancement"), Configuration.SCREENSHOT_ON_ADVANCEMENT)
+                    .setDefaultValue(true)
+                    .setSaveConsumer {
+                        Configuration.SCREENSHOT_ON_ADVANCEMENT = it
+                    }
+                    .setTooltip(Text.translatable("automaticmemories.config.special.advancement.tooltip"))
+                    .build(),
+
+                entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.special.death"), Configuration.SCREENSHOT_ON_DEATH)
+                    .setDefaultValue(true)
+                    .setSaveConsumer {
+                        Configuration.SCREENSHOT_ON_DEATH = it
+                    }
+                    .setTooltip(Text.translatable("automaticmemories.config.special.death.tooltip"))
+                    .build()
+            ))
+                .setExpanded(true)
+                .build()
+        )
         
         category.addEntry(
             entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.miscellaneous.subcategory"), listOf(

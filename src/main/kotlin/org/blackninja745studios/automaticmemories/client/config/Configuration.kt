@@ -20,6 +20,9 @@ object Configuration {
 
     var NOTIFY_PLAYER: Boolean = false
 
+    var SCREENSHOT_ON_ADVANCEMENT: Boolean = true
+    var SCREENSHOT_ON_DEATH: Boolean = true
+
     val CONFIG_PATH: Path = FabricLoader.getInstance().configDir.resolve("automaticmemories.properties")
 
     fun loadFromFile(path: Path) {
@@ -44,6 +47,9 @@ object Configuration {
                 SCREENSHOT_PREFIX = properties.getProperty("screenshot_prefix", SCREENSHOT_PREFIX)
 
                 NOTIFY_PLAYER = properties.getProperty("notify_player", NOTIFY_PLAYER.toString()).toBoolean()
+
+                SCREENSHOT_ON_ADVANCEMENT = properties.getProperty("screenshot_on_advancement", SCREENSHOT_ON_ADVANCEMENT.toString()).toBoolean()
+                SCREENSHOT_ON_DEATH = properties.getProperty("screenshot_on_death", SCREENSHOT_ON_DEATH.toString()).toBoolean()
             }
         } catch(ignored: Exception) {
             saveToFile(path)
@@ -63,6 +69,9 @@ object Configuration {
         properties["screenshot_prefix"] = SCREENSHOT_PREFIX
 
         properties["notify_player"] = NOTIFY_PLAYER.toString()
+
+        properties["screenshot_on_advancement"] = SCREENSHOT_ON_ADVANCEMENT.toString()
+        properties["screenshot_on_death"] = SCREENSHOT_ON_DEATH.toString()
 
         try {
             Files.newBufferedWriter(path).use {
