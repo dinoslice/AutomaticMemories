@@ -74,6 +74,47 @@ object ScreenshotTimer {
         }
     }
 
+    enum class SpecialScreenshotType(val translateKey: String) {
+        Advancement("automaticmemories.screenshot.special.advancement"),
+        Death("automaticmemories.screenshot.special.death")
+    }
+
+    fun takeSpecialScreenshot(client: MinecraftClient, type: SpecialScreenshotType) {
+        ScreenshotRecorder.saveScreenshot(
+            Configuration.getFullDirectory(client.runDirectory, Configuration.SAVE_DIRECTORY),
+            Configuration.SCREENSHOT_PREFIX,
+            client.framebuffer
+        ) {
+            client.execute {
+                if (Configuration.NOTIFY_PLAYER) {
+                    if (it.isPresent) {
+                        val text = Text.translatable("automaticmemories.screenshot.success.clickable")
+                            .formatted(Formatting.UNDERLINE)
+                            .styled { style: Style ->
+                                style.withClickEvent(
+                                    ClickEvent(ClickEvent.Action.OPEN_FILE, it.get())
+                                )
+                            }
+
+                        client.inGameHud.chatHud.addMessage(
+                            AutomaticMemories.addChatPrefix(
+                                Text.translatable(
+                                    type.translateKey, text
+                                )
+                            )
+                        )
+                    } else {
+                        client.inGameHud.chatHud.addMessage(
+                            AutomaticMemories.addChatPrefix(
+                                Text.translatable("automaticmemories.screenshot.failure").formatted(Formatting.RED)
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    }
+
     fun formatTime(millis: Long): String {
         val millisPerSecond: Long = 1000
         val millisPerMinute: Long = millisPerSecond * 60
