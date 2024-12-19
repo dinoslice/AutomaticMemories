@@ -1,7 +1,10 @@
 package org.blackninja745studios.automaticmemories.client
 
 import net.minecraft.client.MinecraftClient
+import net.minecraft.text.ClickEvent
+import net.minecraft.text.Style
 import net.minecraft.text.Text
+import net.minecraft.util.Formatting
 import org.blackninja745studios.automaticmemories.client.config.Configuration
 import java.time.Duration
 import java.time.Instant
@@ -38,10 +41,34 @@ object ScreenshotTimer {
                 Configuration.getFullDirectory(client.runDirectory, Configuration.SAVE_DIRECTORY),
                 Configuration.SCREENSHOT_PREFIX,
                 client.framebuffer
-            ) { msg: Text ->
+            ) {
                 client.execute {
-                    if (Configuration.NOTIFY_PLAYER)
-                        client.inGameHud?.chatHud?.addMessage(msg)
+                    if (Configuration.NOTIFY_PLAYER) {
+                        if (it.isPresent) {
+                            val text = Text.translatable("automaticmemories.screenshot.success.clickable")
+                                .formatted(Formatting.UNDERLINE)
+                                .styled { style: Style ->
+                                    style.withClickEvent(
+                                        ClickEvent(ClickEvent.Action.OPEN_FILE, it.get())
+                                    )
+                                }
+
+                            client.inGameHud.chatHud.addMessage(
+                                AutomaticMemories.addChatPrefix(
+                                    Text.translatable(
+                                        "automaticmemories.screenshot.success.full", text,
+                                        formatTime(Configuration.INTERVAL_MS)
+                                    )
+                                )
+                            )
+                        } else {
+                            client.inGameHud.chatHud.addMessage(
+                                AutomaticMemories.addChatPrefix(
+                                    Text.translatable("automaticmemories.screenshot.failure").formatted(Formatting.RED)
+                                )
+                            )
+                        }
+                    }
                 }
             }
         }
