@@ -1,6 +1,9 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id 'fabric-loom' version '1.2-SNAPSHOT'
     id 'maven-publish'
+    id "org.jetbrains.kotlin.jvm" version "2.1.0"
 }
 
 version = project.mod_version
@@ -80,6 +83,10 @@ java {
     // if it is present.
     // If you remove this line, sources will not be generated.
     withSourcesJar()
+}
+
+kotlin {
+    compilerOptions.jvmTarget = JvmTarget.JVM_17
 }
 
 jar {
