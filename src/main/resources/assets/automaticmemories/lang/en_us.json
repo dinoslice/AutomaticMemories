@@ -6,6 +6,8 @@
   "automaticmemories.config.category": "Automatic Screenshot Configuration",
 
   "automaticmemories.config.interval.subcategory": "Interval Configuration",
+  "automaticmemories.config.interval.enabled": "Enabled",
+  "automaticmemories.config.interval.enabled.tooltip": "Enables automatic screenshots based on interval",
   "automaticmemories.config.interval.interval_ms": "Automatic screenshot interval (ms)",
   "automaticmemories.config.interval.interval_ms.tooltip.main": "Milliseconds between each automatic screenshot",
   "automaticmemories.config.interval.interval_ms.tooltip.editing": "Currently editing to: %s",

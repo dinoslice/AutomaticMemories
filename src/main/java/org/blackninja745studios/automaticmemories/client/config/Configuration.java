@@ -24,6 +24,8 @@ public class Configuration {
 
     public static boolean NOTIFY_PLAYER = false;
 
+    public static boolean ENABLED = true;
+
     public static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("automaticmemories.properties");
 
 
@@ -31,6 +33,8 @@ public class Configuration {
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             Properties properties = new Properties(1);
             properties.load(reader);
+
+            ENABLED = Boolean.parseBoolean(properties.getProperty("interval_enabled", String.valueOf(ENABLED)));
 
             // auto screenshot interval
             INTERVAL_MS = Math.max(0, Long.parseLong(properties.getProperty("interval_ms", String.valueOf(INTERVAL_MS))));
@@ -54,6 +58,7 @@ public class Configuration {
     public static void saveToFile(Path path) {
         Properties properties = new Properties(1);
 
+        properties.put("interval_enabled", String.valueOf(ENABLED));
         properties.put("interval_ms", String.valueOf(INTERVAL_MS));
         properties.put("leftover_interval_ms", String.valueOf(LEFTOVER_INTERVAL_MS));
         properties.put("restart_timer_each_session", String.valueOf(RESTART_TIMER_EACH_SESSION));

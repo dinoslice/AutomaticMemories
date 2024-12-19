@@ -30,6 +30,13 @@ public class ModMenuIntegration implements ModMenuApi {
 
             category.addEntry(
                 entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.interval.subcategory"), List.of(
+                    entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.interval.enabled"), Configuration.ENABLED)
+                            .setDefaultValue(true)
+                            .setTooltip(Text.translatable("automaticmemories.config.interval.enabled.tooltip"))
+                            .setSaveConsumer(b -> {
+                                Configuration.ENABLED = b;
+                            })
+                            .build(),
                     entryBuilder.startLongField(Text.translatable("automaticmemories.config.interval.interval_ms"), Configuration.INTERVAL_MS)
                         .setDefaultValue(3600 * 1000 * 3)
                         .setMin(5 * 1000)
