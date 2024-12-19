@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "org.blackninja745studios.automaticmemories.client.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "ClientAdvancementManagerMixin"
+  ],
+  "client": [
+    "ClientAdvancementManagerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

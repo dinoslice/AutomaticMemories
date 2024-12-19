@@ -1,0 +1,7 @@
+accessWidener v2 named
+
+accessible class net/minecraft/client/network/ClientAdvancementManager$Listener
+
+accessible field net/minecraft/client/network/ClientAdvancementManager advancementProgresses Ljava/util/Map;
+accessible field net/minecraft/client/network/ClientAdvancementManager listener Lnet/minecraft/client/network/ClientAdvancementManager$Listener;
+accessible field net/minecraft/client/network/ClientAdvancementManager LOGGER Lorg/slf4j/Logger;

@@ -29,6 +29,9 @@
       "org.blackninja745studios.automaticmemories.client.config.ModMenuIntegration"
     ]
   },
+  "mixins": [
+    "automaticmemories.mixins.json"
+  ],
   "custom": {
     "modmenu": {
       "links": {
@@ -45,5 +48,6 @@
   "recommends": {
     "modmenu": ">=${modmenu_version}",
     "cloth-config2": ">=${cloth_config_version}"
-  }
+  },
+  "accessWidener": "automaticmemories.accesswidener"
 }
