@@ -8,6 +8,7 @@ import net.minecraft.client.toast.AdvancementToast;
 import net.minecraft.network.packet.s2c.play.AdvancementUpdateS2CPacket;
 import net.minecraft.util.Identifier;
 import org.blackninja745studios.automaticmemories.client.ScreenshotTimer;
+import org.blackninja745studios.automaticmemories.client.config.Configuration;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
@@ -43,7 +44,8 @@ public class ClientAdvancementManagerMixin {
 
                 if (!packet.shouldClearCurrent() && advancementProgress.isDone() && advancement.getDisplay() != null && advancement.getDisplay().shouldShowToast()) {
                     MinecraftClient.getInstance().getToastManager().add(new AdvancementToast(advancement));
-                    ScreenshotTimer.INSTANCE.takeScreenshot(MinecraftClient.getInstance());
+                    if (Configuration.INSTANCE.getSCREENSHOT_ON_ADVANCEMENT())
+                        ScreenshotTimer.INSTANCE.takeSpecialScreenshot(MinecraftClient.getInstance(), ScreenshotTimer.SpecialScreenshotType.Advancement);
                 }
             } else {
                 ClientAdvancementManager.LOGGER.warn("Server informed client about progress for unknown advancement {}", entry.getKey());
