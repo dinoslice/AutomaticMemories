@@ -54,23 +54,22 @@ class ModMenuIntegration : ModMenuApi {
                 
                 entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.interval.restart_timer_each_session"), Configuration.RESTART_TIMER_EACH_SESSION)
                     .setDefaultValue(false)
-                    .setSaveConsumer { 
-                        b: Boolean ->
-                        Configuration.RESTART_TIMER_EACH_SESSION = b
+                    .setSaveConsumer {
+                        Configuration.RESTART_TIMER_EACH_SESSION = it
                     }
                     .setTooltip(Text.translatable("automaticmemories.config.interval.restart_timer_each_session.tooltip"))
                     .build(),
                 entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.interval.require_in_world"), Configuration.REQUIRE_IN_WORLD)
                     .setDefaultValue(true)
                     .setSaveConsumer {
-                        b: Boolean? -> Configuration.REQUIRE_IN_WORLD = b!!
+                        Configuration.REQUIRE_IN_WORLD = it
                     }
                     .setTooltip(Text.translatable("automaticmemories.config.interval.require_in_world.tooltip"))
                     .build(),
                 entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.interval.require_unpaused"), Configuration.REQUIRE_UNPAUSED)
                     .setDefaultValue(false)
                     .setSaveConsumer {
-                        b: Boolean? -> Configuration.REQUIRE_UNPAUSED = b!!
+                        Configuration.REQUIRE_UNPAUSED = it
                     }
                     .setTooltip(Text.translatable("automaticmemories.config.interval.require_unpaused.tooltip"))
                     .build()
@@ -83,9 +82,8 @@ class ModMenuIntegration : ModMenuApi {
             entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.save.subcategory"), listOf(
                 entryBuilder.startTextField(Text.translatable("automaticmemories.config.save.save_directory"), Configuration.SAVE_DIRECTORY)
                     .setDefaultValue("screenshots")
-                    .setSaveConsumer { 
-                        s: String ->
-                        Configuration.SAVE_DIRECTORY = s
+                    .setSaveConsumer {
+                        Configuration.SAVE_DIRECTORY = it
                     }
                     .setErrorSupplier {
                         try {
@@ -95,7 +93,7 @@ class ModMenuIntegration : ModMenuApi {
                         }
                         Optional.empty()
                     }
-                    .setTooltipSupplier { 
+                    .setTooltipSupplier {
                         s: String ->
                         val runDir = MinecraftClient.getInstance().runDirectory
                         
