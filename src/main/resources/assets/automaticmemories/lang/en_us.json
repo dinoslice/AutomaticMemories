@@ -26,6 +26,12 @@
   "automaticmemories.config.save.screenshot_prefix": "Screenshot Prefix",
   "automaticmemories.config.save.screenshot_prefix.tooltip": "Prefix to add to automatic screenshots",
 
+  "automaticmemories.config.special.subcategory": "Special Screenshots",
+  "automaticmemories.config.special.advancement": "Screenshot on Advancement",
+  "automaticmemories.config.special.advancement.tooltip": "If true, a screenshot will be taken when the player is granted an advancement",
+  "automaticmemories.config.special.death": "Screenshot on Death",
+  "automaticmemories.config.special.death.tooltip": "If true, a screenshot will be taken when the player dies",
+
   "automaticmemories.config.miscellaneous.subcategory": "Miscellaneous",
   "automaticmemories.config.miscellaneous.notify_player": "Notify Player",
   "automaticmemories.config.miscellaneous.notify_player.tooltip.main": "Sends a client-side message when an automatic screenshot is taken",
@@ -33,5 +39,7 @@
 
   "automaticmemories.screenshot.success.full": "Automatically saved %s, next screenshot in %s.",
   "automaticmemories.screenshot.success.clickable": "screenshot",
-  "automaticmemories.screenshot.failure": "Couldn't save automatic screenshot: %s"
+  "automaticmemories.screenshot.failure": "Couldn't save automatic screenshot, check logs for a more detailed message",
+  "automaticmemories.screenshot.special.advancement": "Automatically saved advancement %s",
+  "automaticmemories.screenshot.special.death": "Automatically saved death %s"
 }
