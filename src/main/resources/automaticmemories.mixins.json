@@ -7,7 +7,7 @@
   ],
   "client": [
     "ClientAdvancementManagerMixin",
-    "MinecraftClientMixin"
+    "ClientPlayNetworkHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
