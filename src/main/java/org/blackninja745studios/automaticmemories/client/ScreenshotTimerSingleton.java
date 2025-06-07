@@ -26,7 +26,7 @@ public class ScreenshotTimerSingleton {
             @Override
             public void run() {
                 if (client != null && client.getFramebuffer() != null)
-                    takeScreenshot(client);
+                    client.execute(() -> takeScreenshot(client));
 
                 lastScreenshotTime = Instant.now();
             }
