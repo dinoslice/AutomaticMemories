@@ -17,6 +17,9 @@ public class ScreenshotTimerSingleton {
 
     public static void restartOrStartTimer(long delayBeforeFirst, long intervalMs) {
         cancelTimer();
+        if (!Configuration.ENABLED)
+            return;
+
         timer = new Timer();
         lastScreenshotTime = Instant.now().minusMillis(intervalMs - delayBeforeFirst);
 
@@ -42,7 +45,7 @@ public class ScreenshotTimerSingleton {
         return Duration.between(lastScreenshotTime, Instant.now()).toMillis();
     }
 
-    private static void takeScreenshot(MinecraftClient client) {
+    public static void takeScreenshot(MinecraftClient client) {
         boolean worldReq = !Configuration.REQUIRE_IN_WORLD || client.world != null;
 
         boolean unpausedReq = !Configuration.REQUIRE_UNPAUSED || client.world == null || !client.isPaused();

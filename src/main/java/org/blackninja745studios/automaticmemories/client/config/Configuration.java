@@ -13,6 +13,11 @@ import java.util.Properties;
 
 
 public class Configuration {
+    public static boolean ENABLED = true;
+
+    public static boolean SCREENSHOT_DEATH = true;
+    public static boolean SCREENSHOT_ADVANCEMENT = true;
+
     public static long INTERVAL_MS = 3600 * 1000 * 3;
     public static long LEFTOVER_INTERVAL_MS = 0;
     public static boolean RESTART_TIMER_EACH_SESSION = false;
@@ -21,6 +26,8 @@ public class Configuration {
 
     public static String SAVE_DIRECTORY = "screenshots";
     public static String SCREENSHOT_PREFIX = "auto_";
+    public static String DEATH_PREFIX = "death_";
+    public static String ADVANCEMENT_PREFIX = "advancement_";
 
     public static boolean NOTIFY_PLAYER = false;
 
@@ -31,6 +38,11 @@ public class Configuration {
         try (BufferedReader reader = Files.newBufferedReader(path)) {
             Properties properties = new Properties(1);
             properties.load(reader);
+
+            ENABLED = Boolean.parseBoolean(properties.getProperty("enabled", String.valueOf(ENABLED)));
+
+            SCREENSHOT_DEATH = Boolean.parseBoolean(properties.getProperty("screenshot_death", String.valueOf(ENABLED)));
+            SCREENSHOT_ADVANCEMENT = Boolean.parseBoolean(properties.getProperty("screenshot_advancement", String.valueOf(ENABLED)));
 
             // auto screenshot interval
             INTERVAL_MS = Math.max(0, Long.parseLong(properties.getProperty("interval_ms", String.valueOf(INTERVAL_MS))));
@@ -53,6 +65,8 @@ public class Configuration {
 
     public static void saveToFile(Path path) {
         Properties properties = new Properties(1);
+
+        properties.put("enabled", String.valueOf(ENABLED));
 
         properties.put("interval_ms", String.valueOf(INTERVAL_MS));
         properties.put("leftover_interval_ms", String.valueOf(LEFTOVER_INTERVAL_MS));
