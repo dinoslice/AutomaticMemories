@@ -17,6 +17,9 @@ public class ScreenshotTimerSingleton {
 
     public static void restartOrStartTimer(long delayBeforeFirst, long intervalMs) {
         cancelTimer();
+        if (!Configuration.ENABLED)
+            return;
+
         timer = new Timer();
         lastScreenshotTime = Instant.now().minusMillis(intervalMs - delayBeforeFirst);
 
