@@ -21,40 +21,41 @@ public class ScreenshotRecorderExt {
     }
 
     private static void saveScreenshotInner(File saveDirectory, String prefix, Framebuffer framebuffer, Consumer<Text> messageReceiver) {
-        NativeImage nativeImage = ScreenshotRecorder.takeScreenshot(framebuffer);
-        boolean ignored = saveDirectory.mkdirs();
+        ScreenshotRecorder.takeScreenshot(framebuffer, (nativeImage) -> {
+            boolean ignored = saveDirectory.mkdirs();
 
-        File screenshotFile = assignScreenshotFilename(saveDirectory, prefix);
+            File screenshotFile = assignScreenshotFilename(saveDirectory, prefix);
 
-        Util.getIoWorkerExecutor().execute(() -> {
-            try {
-                nativeImage.writeTo(screenshotFile);
+            Util.getIoWorkerExecutor().execute(() -> {
+                try {
+                    nativeImage.writeTo(screenshotFile);
 
-                Text text = Text.translatable("automaticmemories.screenshot.success.clickable")
-                    .formatted(Formatting.UNDERLINE)
-                    .styled(style -> style.withClickEvent(
-                        new ClickEvent(ClickEvent.Action.OPEN_FILE, screenshotFile.getAbsolutePath())
+                    Text text = Text.translatable("automaticmemories.screenshot.success.clickable")
+                            .formatted(Formatting.UNDERLINE)
+                            .styled(style -> style.withClickEvent(
+                                    new ClickEvent.OpenFile(screenshotFile.getAbsolutePath())
+                            ));
+
+                    messageReceiver.accept(AutomaticMemories.addChatPrefix(
+                            Text.translatable(
+                                    "automaticmemories.screenshot.success.full", text,
+                                    ScreenshotTimerSingleton.formatTime(Configuration.INTERVAL_MS)
+                            )
                     ));
 
-                messageReceiver.accept(AutomaticMemories.addChatPrefix(
-                    Text.translatable(
-                        "automaticmemories.screenshot.success.full", text,
-                        ScreenshotTimerSingleton.formatTime(Configuration.INTERVAL_MS)
-                    )
-                ));
+                    AutomaticMemories.LOGGER.info("Saved automatic screenshot as {}, next screenshot in {} ms.", screenshotFile.toString(), Configuration.INTERVAL_MS);
 
-                AutomaticMemories.LOGGER.info("Saved automatic screenshot as {}, next screenshot in {} ms.", screenshotFile.toString(), Configuration.INTERVAL_MS);
+                } catch (Exception e) {
+                    AutomaticMemories.LOGGER.error("Couldn't save screenshot", e);
 
-            } catch (Exception e) {
-                AutomaticMemories.LOGGER.error("Couldn't save screenshot", e);
+                    messageReceiver.accept(AutomaticMemories.addChatPrefix(
+                            Text.translatable("automaticmemories.screenshot.failure", e.getMessage()).formatted(Formatting.RED)
+                    ));
+                } finally {
+                    nativeImage.close();
+                }
 
-                messageReceiver.accept(AutomaticMemories.addChatPrefix(
-                    Text.translatable("automaticmemories.screenshot.failure", e.getMessage()).formatted(Formatting.RED)
-                ));
-            } finally {
-                nativeImage.close();
-            }
-
+            });
         });
     }
 
