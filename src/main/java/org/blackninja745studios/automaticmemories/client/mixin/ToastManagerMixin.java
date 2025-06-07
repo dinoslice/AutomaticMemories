@@ -16,7 +16,7 @@ public class ToastManagerMixin {
     public void add(Toast toast, CallbackInfo info) {
         MinecraftClient client = MinecraftClient.getInstance();
 
-        if (client != null && Configuration.ENABLED)
+        if (client != null && Configuration.ENABLED && Configuration.SCREENSHOT_ADVANCEMENT)
             client.execute(() -> ScreenshotRecorderExt.saveScreenshot(
                             Configuration.getFullDirectory(client.runDirectory, Configuration.SAVE_DIRECTORY),
                             Configuration.ADVANCEMENT_PREFIX,

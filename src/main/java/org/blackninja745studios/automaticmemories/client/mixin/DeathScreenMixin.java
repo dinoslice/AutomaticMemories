@@ -23,7 +23,7 @@ public class DeathScreenMixin {
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo info) {
         MinecraftClient client = MinecraftClient.getInstance();
 
-        if (client != null && Configuration.ENABLED && !TOOK_FOR_DEATH) {
+        if (client != null && Configuration.ENABLED && Configuration.SCREENSHOT_DEATH && !TOOK_FOR_DEATH) {
             client.execute(() -> ScreenshotRecorderExt.saveScreenshot(
                     Configuration.getFullDirectory(client.runDirectory, Configuration.SAVE_DIRECTORY),
                     Configuration.DEATH_PREFIX,
