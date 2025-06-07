@@ -34,6 +34,8 @@ public class Configuration {
             Properties properties = new Properties(1);
             properties.load(reader);
 
+            ENABLED = Boolean.parseBoolean(properties.getProperty("enabled", String.valueOf(ENABLED)));
+
             // auto screenshot interval
             INTERVAL_MS = Math.max(0, Long.parseLong(properties.getProperty("interval_ms", String.valueOf(INTERVAL_MS))));
 
@@ -55,6 +57,8 @@ public class Configuration {
 
     public static void saveToFile(Path path) {
         Properties properties = new Properties(1);
+
+        properties.put("enabled", String.valueOf(ENABLED));
 
         properties.put("interval_ms", String.valueOf(INTERVAL_MS));
         properties.put("leftover_interval_ms", String.valueOf(LEFTOVER_INTERVAL_MS));
