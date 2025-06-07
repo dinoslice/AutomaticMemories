@@ -4,6 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.ToastManager;
 import org.blackninja745studios.automaticmemories.client.ScreenshotTimerSingleton;
+import org.blackninja745studios.automaticmemories.client.config.Configuration;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,7 +16,7 @@ public class ToastManagerMixin {
     public void add(Toast toast, CallbackInfo info) {
         MinecraftClient client = MinecraftClient.getInstance();
 
-        if (client != null)
+        if (client != null && Configuration.ENABLED)
             client.execute(() -> ScreenshotTimerSingleton.takeScreenshot(client));
     }
 }
