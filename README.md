@@ -27,8 +27,8 @@ By default, this mod will carry over the timer between sessions. For exmaple, if
 This is useful since you probably won't often play for as long as your interval is, which would mean the mod wouldn't ever take a screenshot. Leaving "Restart timer each session" disabled solves this.
 
 ## Support
-- Open an issue on [GitHub](https://github.com/BlackNinja745-Studios/AutomaticMemories/issues)
-- Ask for help on [Discord](https://discord.bn745studios.com)
+- Open an issue on [GitHub](https://github.com/dinoslice/AutomaticMemories/issues)
+- Ask for help on [Discord](https://discord.gg/2pn53HV)
 
 ## Dependencies
 - [Fabric API](https://modrinth.com/mod/fabric-api)
