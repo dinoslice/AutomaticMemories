@@ -29,6 +29,22 @@ public class ModMenuIntegration implements ModMenuApi {
             ConfigCategory category = builder.getOrCreateCategory(Text.translatable("automaticmemories.config.category"));
 
             category.addEntry(
+                    entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.enabled"), Configuration.ENABLED)
+                            .setDefaultValue(true)
+                            .setSaveConsumer((enabled) -> {
+                                Configuration.ENABLED = enabled;
+
+                                if (enabled)
+                                    ScreenshotTimerSingleton.restartOrStartTimer(Configuration.LEFTOVER_INTERVAL_MS, Configuration.INTERVAL_MS);
+                                else {
+                                    ScreenshotTimerSingleton.cancelTimer();
+                                    Configuration.LEFTOVER_INTERVAL_MS = ScreenshotTimerSingleton.timeSinceLastScreenshot();
+                                }
+                            })
+                            .build()
+            );
+
+            category.addEntry(
                 entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.interval.subcategory"), List.of(
                     entryBuilder.startLongField(Text.translatable("automaticmemories.config.interval.interval_ms"), Configuration.INTERVAL_MS)
                         .setDefaultValue(3600 * 1000 * 3)
