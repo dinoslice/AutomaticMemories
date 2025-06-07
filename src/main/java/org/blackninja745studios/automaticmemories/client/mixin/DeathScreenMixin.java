@@ -1,8 +1,8 @@
 package org.blackninja745studios.automaticmemories.client.mixin;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.DeathScreen;
-import net.minecraft.client.util.math.MatrixStack;
 import org.blackninja745studios.automaticmemories.client.ScreenshotRecorderExt;
 import org.blackninja745studios.automaticmemories.client.config.Configuration;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +20,7 @@ public class DeathScreenMixin {
     }
 
     @Inject(method = "render", at = @At("TAIL"))
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo info) {
+    public void render(DrawContext matrices, int mouseX, int mouseY, float delta, CallbackInfo info) {
         MinecraftClient client = MinecraftClient.getInstance();
 
         if (client != null && Configuration.ENABLED && Configuration.SCREENSHOT_DEATH && !TOOK_FOR_DEATH) {
