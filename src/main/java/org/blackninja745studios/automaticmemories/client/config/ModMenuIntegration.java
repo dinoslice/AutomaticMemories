@@ -30,6 +30,7 @@ public class ModMenuIntegration implements ModMenuApi {
 
             category.addEntry(
                     entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.enabled"), Configuration.ENABLED)
+                            .setTooltip(Text.translatable("automaticmemories.config.enabled.tooltip"))
                             .setDefaultValue(true)
                             .setSaveConsumer((enabled) -> {
                                 Configuration.ENABLED = enabled;
@@ -59,10 +60,11 @@ public class ModMenuIntegration implements ModMenuApi {
                             Text current = Text.translatable("automaticmemories.config.interval.interval_ms.tooltip.editing", ScreenshotTimerSingleton.formatTime(l))
                                     .formatted(Formatting.GOLD);
 
-                            Text remaining = Text.translatable("automaticmemories.config.interval.interval_ms.tooltip.remaining",
+                            Text remaining = Configuration.ENABLED ? Text.translatable("automaticmemories.config.interval.interval_ms.tooltip.remaining",
                                     ScreenshotTimerSingleton.formatTime(Configuration.INTERVAL_MS - ScreenshotTimerSingleton.timeSinceLastScreenshot()),
                                     ScreenshotTimerSingleton.formatTime(Configuration.INTERVAL_MS)
-                            ).formatted(Formatting.GRAY);
+                            ).formatted(Formatting.GRAY) : Text.translatable("automaticmemories.config.interval.interval_ms.tooltip.disabled")
+                                    .formatted(Formatting.GRAY);
 
                             return l == Configuration.INTERVAL_MS ?
                                     Optional.of(new Text[] { main, remaining }) :
