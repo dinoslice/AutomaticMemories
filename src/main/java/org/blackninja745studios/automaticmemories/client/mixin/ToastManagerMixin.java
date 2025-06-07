@@ -3,7 +3,7 @@ package org.blackninja745studios.automaticmemories.client.mixin;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.toast.ToastManager;
-import org.blackninja745studios.automaticmemories.client.ScreenshotTimerSingleton;
+import org.blackninja745studios.automaticmemories.client.ScreenshotRecorderExt;
 import org.blackninja745studios.automaticmemories.client.config.Configuration;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,6 +17,15 @@ public class ToastManagerMixin {
         MinecraftClient client = MinecraftClient.getInstance();
 
         if (client != null && Configuration.ENABLED)
-            client.execute(() -> ScreenshotTimerSingleton.takeScreenshot(client));
+            client.execute(() -> ScreenshotRecorderExt.saveScreenshot(
+                            Configuration.getFullDirectory(client.runDirectory, Configuration.SAVE_DIRECTORY),
+                            Configuration.ADVANCEMENT_PREFIX,
+                            client.getFramebuffer(),
+                            msg -> client.execute(() -> {
+                                if (Configuration.NOTIFY_PLAYER && client.inGameHud != null && client.world != null)
+                                    client.inGameHud.getChatHud().addMessage(msg);
+                            })
+                    )
+            );
     }
 }
