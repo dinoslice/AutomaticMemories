@@ -142,6 +142,24 @@ public class ModMenuIntegration implements ModMenuApi {
             );
 
             category.addEntry(
+                    entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.special_screenshots.subcategory"), List.of(
+                            entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.special_screenshots.death"), Configuration.SCREENSHOT_DEATH)
+                                    .setDefaultValue(true)
+                                    .setTooltip(Text.translatable("automaticmemories.config.special_screenshots.death.tooltip"))
+                                    .setSaveConsumer(enabled -> Configuration.SCREENSHOT_DEATH = enabled)
+                                    .build(),
+
+                            entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.special_screenshots.advancement"), Configuration.SCREENSHOT_ADVANCEMENT)
+                                    .setDefaultValue(true)
+                                    .setTooltip(Text.translatable("automaticmemories.config.special_screenshots.advancement.tooltip"))
+                                    .setSaveConsumer(enabled -> Configuration.SCREENSHOT_ADVANCEMENT = enabled)
+                                    .build()
+                    ))
+                    .setExpanded(true)
+                    .build()
+            );
+
+            category.addEntry(
                 entryBuilder.startSubCategory(Text.translatable("automaticmemories.config.miscellaneous.subcategory"), List.of(
                     entryBuilder.startBooleanToggle(Text.translatable("automaticmemories.config.miscellaneous.notify_player"), Configuration.NOTIFY_PLAYER)
                         .setSaveConsumer(b -> Configuration.NOTIFY_PLAYER = b)

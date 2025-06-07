@@ -12,6 +12,9 @@
       }
     }
   ],
+  "mixins": [
+    "automaticmemories.client.mixins.json"
+  ],
   "contact": {
     "issues": "https://github.com/BlackNinja745-Studios/AutomaticMemories/issues",
     "sources": "https://github.com/BlackNinja745-Studios/AutomaticMemories",
